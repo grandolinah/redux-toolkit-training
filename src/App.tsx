@@ -1,10 +1,17 @@
-import { useState } from 'react'
+import { useAppDispatch, useAppSelector } from './app/hooks';
+import { incremented, amountAdded } from './features/counter/counter-slice';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const count = useAppSelector(state => state.counter.value);
+  const dispatch = useAppDispatch();
+
+  const onClickHandler = () => {
+    // dispatch(incremented());
+    dispatch(amountAdded(3));
+  };
 
   return (
     <>
@@ -18,7 +25,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={onClickHandler}>
           count is {count}
         </button>
         <p>
